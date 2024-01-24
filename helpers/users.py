@@ -45,18 +45,18 @@ def CreateUser():
 
         reponse['status'] = 'Succes'
 
-    # except Exception as e:
-    #     reponse['error_description'] = str(e)
-    #     reponse['status'] = 'error'
-    except:
-        reponse['error'] = 'Incorrect data, recheck it'
+    except Exception as e:
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
+    # except:
+    #     reponse['error'] = 'Incorrect data, recheck it'
 
     return reponse
 
 
 
 def ReadAllUser():
-    response = {}
+    reponse = {}
 
     try:
         readAllUser = User.query.all()
@@ -78,20 +78,20 @@ def ReadAllUser():
 
                 user_informations.append(user_infos)
 
-            response['status'] = 'success'
-            response ['users'] = user_informations
+            reponse['status'] = 'success'
+            reponse ['users'] = user_informations
         else:
-            response['status'] = 'erreur'
-            response['motif'] = 'aucun'
+            reponse['status'] = 'erreur'
+            reponse['motif'] = 'aucun'
 
     except Exception as e:
-        response['error_description'] = str(e)
-        response['status'] = 'error'
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
 
-    return response
+    return reponse
 
 def ReadSingleUser():
-    response = {}
+    reponse = {}
 
     try:
         uid = request.json.get('u_uid')
@@ -110,17 +110,17 @@ def ReadSingleUser():
                 'city': readSingleUser.u_city, 
             }
 
-            response['status'] = 'success'
-            response['user'] = user_infos
+            reponse['status'] = 'success'
+            reponse['user'] = user_infos
         else:
-            response['status'] = 'erreur'
-            response['motif'] = 'aucun'
+            reponse['status'] = 'erreur'
+            reponse['motif'] = 'aucun'
 
     except Exception as e:
-        response['error_description'] = str(e)
-        response['status'] = 'error'
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
 
-    return response
+    return reponse
 
 
 
@@ -155,7 +155,7 @@ def UpdateUser  ():
 
 
 def DeleteUser():
-    response = {}
+    reponse = {}
 
     try:
         uid = request.json.get('u_uid')
@@ -165,22 +165,22 @@ def DeleteUser():
         if deleteuser:
             db.session.delete(deleteuser)
             db.session.commit()
-            response['status'] = 'success'
+            reponse['status'] = 'success'
         else:
-            response['status'] = 'error'
-            response['motif'] = 'utilisateur non trouvé'
+            reponse['status'] = 'error'
+            reponse['motif'] = 'utilisateur non trouvé'
 
     except Exception as e:
-        response['error_description'] = str(e)
-        response['status'] = 'error'
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
 
-    return response
+    return reponse
 
 
 
 def LoginUser():
-    response = {}
-    responses = {}
+    reponse = {}
+    reponses = {}
 
     try:
         username = request.json.get('username')
@@ -192,16 +192,16 @@ def LoginUser():
             expires = timedelta(hours=1)
             access_token = create_access_token(identity=username)
 
-            response['status'] = 'success'
-            response['message'] = 'Login successful'
-            response['access_token'] = access_token
+            reponse['status'] = 'success'
+            reponse['message'] = 'Login successful'
+            # reponse['access_token'] = access_token
 
         else:
-            response['status'] = 'error'
-            response['message'] = 'Invalid username or password'
+            reponse['status'] = 'error'
+            reponse['message'] = 'Invalid username or password'
 
     except Exception as e:
-        response['error_description'] = str(e)
-        response['status'] = 'error'
+        reponse['error_description'] = str(e)
+        reponse['status'] = 'error'
 
-    return response
+    return reponse

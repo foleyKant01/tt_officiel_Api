@@ -111,8 +111,8 @@ def ReadAllBusiness():
 
         for advertisement in all_business:
             business_info = {
-                'ad_uid': advertisement.ad_uid,
-                'name': advertisement.ad_name,              
+                'bu_uid': advertisement.bu_uid,
+                'name': advertisement.bu_name,              
             }
             business_infos.append(business_info)
 
@@ -128,30 +128,30 @@ def ReadAllBusiness():
 
 
 
-def ReadSingleAdvertisement():
+def ReadSingleBusiness():
     response = {}
 
     try:
-        advertisement_uid = request.json.get('ad_uid')
+        business_uid = request.json.get('bu_uid')
 
 
-        single_advertisement = Business.query.filter_by(ad_uid=advertisement_uid).first()
+        single_business = Business.query.filter_by(bu_uid=business_uid).first()
 
-        advertisement_info = {
-            'ad_uid': single_advertisement.ad_uid,
-            'name': single_advertisement.ad_name,
-            'email': single_advertisement.ad_email,
-            'description': single_advertisement.ad_description,
-            'mobile': single_advertisement.ad_mobile,
-            'address': single_advertisement.ad_address,                
+        business_info = {
+            'bu_uid': single_business.bu_uid,
+            'name': single_business.bu_name,
+            'email': single_business.bu_email,
+            'categories': single_business.bu_categories,
+            'description': single_business.bu_description,
+            'mobile': single_business.bu_mobile,
+            'address': single_business.bu_address,                
         }
 
         response['status'] = 'success'
-        response['user'] = advertisement_info
+        response['user'] = business_info
 
     except Exception as e:
         response['status'] = 'error'
         response['error_description'] = str(e)
 
     return response
-

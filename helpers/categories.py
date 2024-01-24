@@ -6,32 +6,19 @@ from model.tt import Categories
 
 
 
-def CreateAdvertisement():
+def CreateCategories():
     
     response = {}
 
     try:
-        ad_name = request.json.get('name')
-        ad_email = request.json.get('email')
-        ad_description = request.json.get('description')
-        ad_mobile = request.json.get('mobile')
-        ad_address = request.json.get('address')
-        ad_uid = str(uuid.uuid4())
+        ca_name = request.json.get('name')
+        ca_uid = str(uuid.uuid4())
 
+        new_categories = Categories()
+        new_categories.ca_name = ca_name
+        new_categories.ca_uid = ca_uid
         
-        new_advertisement = Advertisement()
-
-        new_advertisement.ad_name = ad_name
-        new_advertisement.ad_email = ad_email
-        new_advertisement.ad_description = ad_description
-        new_advertisement.ad_mobile = ad_mobile
-        new_advertisement.ad_address = ad_address
-        new_advertisement.ad_uid = ad_uid
-        
-
-
-        
-        db.session.add(new_advertisement)
+        db.session.add(new_categories)
         db.session.commit()
 
         response['satus'] = 'success'
@@ -43,28 +30,21 @@ def CreateAdvertisement():
     return response
 
 
-def UpdateAdvertisement():
+def UpdateCategories():
     response = {}
 
     try:
 
-        update_advertisement = Advertisement.query.filter_by(ad_uid="efa34482-9325-48be-9cac-9875e7fc8991").first()
+        update_categories = Categories.query.filter_by(ca_uid="efa34482-9325-48be-9cac-9875e7fc8991").first()
         
-        if update_advertisement:
-            update_advertisement.ad_name = request.json.get('name', update_advertisement.ad_name)
-            update_advertisement.ad_email = request.json.get('email', update_advertisement.ad_email)
-            update_advertisement.ad_description = request.json.get('description', update_advertisement.ad_description)            
-            update_advertisement.ad_mobile = request.json.get('mobile', update_advertisement.ad_mobile)
-            update_advertisement.ad_address = request.json.get('address', update_advertisement.ad_address)
-        
-
-        db.session.add(update_advertisement)
+        if update_categories:
+            update_categories.ca_name = request.json.get('name', update_categories.ca_name)
+     
+        db.session.add(update_categories)
         db.session.commit() 
         
         response['status'] = 'success'
-        response['message'] = "the ad has been updated!"
-
-
+        response['message'] = "the categories has been updated!"
 
     except Exception as e:
         response['status'] = 'error'
@@ -73,15 +53,13 @@ def UpdateAdvertisement():
     return response
 
 
-
-
-def DeleteAdvertisement():
+def DeleteCategories():
     response = {}
 
     try:
-        uid = request.json.get('ad_uid')
+        uid = request.json.get('ca_uid')
 
-        deleteAdvertisement = Advertisement.query.filter_by(ad_uid=uid).first()
+        deleteAdvertisement = Categories.query.filter_by(ca_uid=uid).first()
 
         if deleteAdvertisement:
             db.session.delete(deleteAdvertisement)
@@ -99,23 +77,23 @@ def DeleteAdvertisement():
 
 
 
-def ReadAllAdvertisement():
+def ReadAllCategories():
     response = {}
     
     try:
-        all_advertisement = Advertisement.query.all()
+        all_categiries = Categories.query.all()
 
-        advertisement_infos = []
+        categories_infos = []
 
-        for advertisement in all_advertisement:
+        for categories in all_categiries:
             advertisement_info = {
-                'ad_uid': advertisement.ad_uid,
-                'name': advertisement.ad_name,              
+                'ad_uid': categories.ca_uid,
+                'name': categories.ca_name,              
             }
-            advertisement_infos.append(advertisement_info)
+            categories_infos.append(advertisement_info)
 
         response['status'] = 'success'
-        response ['users'] = advertisement_infos
+        response ['users'] = categories_infos
 
     except Exception as e:
         response['status'] = 'error'
@@ -126,26 +104,22 @@ def ReadAllAdvertisement():
 
 
 
-def ReadSingleAdvertisement():
+def ReadSingleCategories():
     response = {}
 
     try:
-        advertisement_uid = request.json.get('ad_uid')
+        categories_uid = request.json.get('ca_uid')
 
 
-        single_advertisement = Advertisement.query.filter_by(ad_uid=advertisement_uid).first()
+        single_categories = Categories.query.filter_by(ca_uid=categories_uid).first()
 
-        advertisement_info = {
-            'ad_uid': single_advertisement.ad_uid,
-            'name': single_advertisement.ad_name,
-            'email': single_advertisement.ad_email,
-            'description': single_advertisement.ad_description,
-            'mobile': single_advertisement.ad_mobile,
-            'address': single_advertisement.ad_address,                
+        categories_info = {
+            'ad_uid': single_categories.ca_uid,
+            'name': single_categories.ca_name,                
         }
 
         response['status'] = 'success'
-        response['user'] = advertisement_info
+        response['user'] = categories_info
 
     except Exception as e:
         response['status'] = 'error'

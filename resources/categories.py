@@ -11,10 +11,10 @@ class CategoriesApi(Resource):
     
     def get(self, route):
         if route == "readall":
-            return GetAllCategories()
+            return ReadAllCategories()
 
         if route == "readsingle":
-            return GetSingleCategories()
+            return ReadSingleCategories()
     
     def delete(self, route):
          if route == "delete":
