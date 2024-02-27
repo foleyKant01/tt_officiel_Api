@@ -8,7 +8,7 @@ from model.tt import Business
 
 def CreateBusiness():
     
-    response = {}
+    response = {}   
 
     try:
         bu_title = request.json.get('title')

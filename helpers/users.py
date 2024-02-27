@@ -14,8 +14,7 @@ def CreateUser():
     reponse = {}
 
     try:
-        u_firstname = (request.json.get('firstname'))
-        u_lastname = (request.json.get('lastname'))
+        u_fullname = (request.json.get('fullname'))
         u_username = (request.json.get('username'))
         u_mobile = (request.json.get('mobile'))      
         u_address = (request.json.get('address'))
@@ -27,8 +26,7 @@ def CreateUser():
         hashed_password = bcrypt.hashpw(u_password.encode('utf-8'), bcrypt.gensalt())
         
         new_user = User()
-        new_user.u_firstname = u_firstname
-        new_user.u_lastname = u_lastname
+        new_user.u_fullname = u_fullname
         new_user.u_username = u_username
         new_user.u_mobile = u_mobile
         new_user.u_address = u_address
@@ -67,8 +65,7 @@ def ReadAllUser():
             for user in readAllUser:
                 user_infos = {
                     'u_uid': user.u_uid,
-                    'firstname': user.u_firstname,
-                    'lastname': user.u_lastname,
+                    'fullname': user.u_fullname,
                     'username': user.u_username,
                     'mobile': user.u_mobile,
                     'address': user.u_address,
@@ -101,8 +98,7 @@ def ReadSingleUser():
         if readSingleUser:
             user_infos = {
                 'u_uid': readSingleUser.u_uid,
-                'firstname': readSingleUser.u_firstname,
-                'lastname': readSingleUser.u_lastname,
+                'fullname': readSingleUser.u_fullname,
                 'username': readSingleUser.u_username,
                 'mobile': readSingleUser.u_mobile,
                 'address': readSingleUser.u_address,
@@ -128,11 +124,12 @@ def UpdateUser  ():
     reponse = {}
 
     try:
-        updateuser = User.query.filter_by(u_uid = "b7f45e6f-aecd-4a61-9122-639b71839d74").first()
+        uid = request.json.get('u_uid')
+        
+        updateuser = User.query.filter_by(u_uid = uid).first()
 
         if updateuser:
-            updateuser.u_firstname = request.json.get('firstname', updateuser.u_firstname)
-            updateuser.u_lastname = request.json.get('lastname', updateuser.u_lastname)
+            updateuser.u_fullname = request.json.get('fullname', updateuser.u_fullname)
             updateuser.u_username = request.json.get('username', updateuser.u_username)            
             updateuser.u_mobile = request.json.get('mobile', updateuser.u_mobile)
             updateuser.u_address = request.json.get('address', updateuser.u_address)
@@ -194,7 +191,7 @@ def LoginUser():
 
             reponse['status'] = 'success'
             reponse['message'] = 'Login successful'
-            # reponse['access_token'] = access_token
+            reponse['access_token'] = access_token
 
         else:
             reponse['status'] = 'error'

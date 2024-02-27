@@ -45,4 +45,4 @@ api.add_resource(BusinessApi, '/api/business/<string:route>', endpoint='all_busi
 api.add_resource(CategoriesApi, '/api/categories/<string:route>', endpoint='all_categiries', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 
 if __name__ == '__main__':
-    app.run(debug=True,  host="0.0.0.0")
+    app.run(debug=True,  host="0.0.0.0")  

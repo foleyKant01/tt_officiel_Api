@@ -8,8 +8,7 @@ from sqlalchemy.sql import expression
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    u_firstname = db.Column(db.String(128), nullable=False)
-    u_lastname = db.Column(db.String(128), nullable=False)
+    u_fullname = db.Column(db.String(128), nullable=False)
     u_username = db.Column(db.String(128), nullable=False)
     u_mobile = db.Column(db.String(128), nullable=False)
     u_address = db.Column(db.String(128), nullable=False)
@@ -48,6 +47,7 @@ class Business(db.Model):
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ca_name = db.Column(db.String(128), nullable=False)
+    ca_description = db.Column(db.String(250), nullable=False)
     ca_uid = db.Column(db.String(128), nullable=False)
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
