@@ -62,9 +62,9 @@ def DeleteCategories():
     response = {}
 
     try:
-        uid = request.json.get('ca_uid')
+        ca_uid = request.json.get('ca_uid')
 
-        deleteAdvertisement = Categories.query.filter_by(ca_uid=uid).first()
+        deleteAdvertisement = Categories.query.filter_by(ca_uid=ca_uid).first()
 
         if deleteAdvertisement:
             db.session.delete(deleteAdvertisement)
@@ -114,13 +114,13 @@ def ReadSingleCategories():
     response = {}
 
     try:
-        categories_uid = request.json.get('ca_uid')
+        ca_uid = request.json.get('ca_uid')
 
 
-        single_categories = Categories.query.filter_by(ca_uid=categories_uid).first()
+        single_categories = Categories.query.filter_by(ca_uid=ca_uid).first()
 
         categories_info = {
-            'ad_uid': single_categories.ca_uid,
+            'ca_uid': single_categories.ca_uid,
             'name': single_categories.ca_name,  
             'description': single_categories.ca_description,              
 
