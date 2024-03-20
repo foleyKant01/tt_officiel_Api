@@ -117,7 +117,7 @@ def ReadAllBusiness():
             business_infos.append(business_info)
 
         response['status'] = 'success'
-        response ['users'] = business_infos
+        response ['busi'] = business_infos
 
     except Exception as e:
         response['status'] = 'error'
