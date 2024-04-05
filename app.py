@@ -6,6 +6,7 @@ from config.db import db
 from config.constant import *
 from model.tt import *
 from resources.users import UsersApi
+from resources.teller import TellerApi
 from resources.advertisement import AdvertisementApi
 from resources.business import BusinessApi
 from resources.categories import CategoriesApi
@@ -40,6 +41,7 @@ def home():
     return render_template('index.html')
 
 api.add_resource(UsersApi, '/api/user/<string:route>', endpoint='all_user', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+api.add_resource(TellerApi, '/api/teller/<string:route>', endpoint='all_teller', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(AdvertisementApi, '/api/advertisement/<string:route>', endpoint='all_advertisement', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(BusinessApi, '/api/business/<string:route>', endpoint='all_business', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 api.add_resource(CategoriesApi, '/api/categories/<string:route>', endpoint='all_categiries', methods=['GET', 'POST', 'DELETE', 'PATCH'])

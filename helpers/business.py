@@ -18,6 +18,9 @@ def CreateBusiness():
         bu_description = request.json.get('description')
         bu_mobile = request.json.get('mobile')
         bu_address = request.json.get('address')
+        bu_city = request.json.get('city')
+        bu_pic1 = request.json.get('pic1')
+        bu_pic2 = request.json.get('pic2')
         bu_uid = str(uuid.uuid4())
 
         new_business = Business()
@@ -28,6 +31,9 @@ def CreateBusiness():
         new_business.bu_description = bu_description
         new_business.bu_mobile = bu_mobile
         new_business.bu_address = bu_address
+        new_business.bu_city = bu_city
+        new_business.bu_pic1 = bu_pic1
+        new_business.bu_pic2 = bu_pic2
         new_business.bu_uid = bu_uid
         
         db.session.add(new_business)
@@ -56,6 +62,9 @@ def UpdateBusiness():
             update_business.bu_description = request.json.get('description', update_business.bu_description)            
             update_business.bu_mobile = request.json.get('mobile', update_business.bu_mobile)
             update_business.bu_address = request.json.get('address', update_business.bu_address)
+            update_business.bu_city = request.json.get('address', update_business.bu_city)
+            update_business.bu_pic1 = request.json.get('address', update_business.bu_pic1)
+            update_business.bu_pic2 = request.json.get('address', update_business.bu_pic2)
         
 
         db.session.add(update_business)

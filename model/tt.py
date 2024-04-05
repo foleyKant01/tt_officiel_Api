@@ -19,6 +19,19 @@ class User(db.Model):
     creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
     update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+class Teller(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    t_fullname = db.Column(db.String(128), nullable=False)
+    t_username = db.Column(db.String(128), nullable=False)
+    t_mobile = db.Column(db.String(128), nullable=False)
+    t_address = db.Column(db.String(128), nullable=False)
+    t_email = db.Column(db.String(128), nullable=False)
+    t_password = db.Column(db.String(128), nullable=False)
+    t_city = db.Column(db.String(128), nullable=False)
+    t_uid = db.Column(db.String(128), nullable=False)
+    creation_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+    update_date = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
 class Advertisement(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     ad_name = db.Column(db.String(128), nullable=False)
